@@ -64,6 +64,9 @@ local slo = import 'slo-libsonnet/slo.libsonnet';
       // For links between grafana dashboards, you need to tell us if your grafana
       // servers under some non-root path.
       linkPrefix: '.',
+
+      // The default refresh time for all dashboards, default to 10s
+      refresh: '10s',
     },
 
     // Opt-in to multiCluster dashboards by overriding this and the clusterLabel.
@@ -77,7 +80,7 @@ local slo = import 'slo-libsonnet/slo.libsonnet';
     fstypeSelector: 'fstype=~"%s"' % std.join('|', self.fstypes),
 
     // This list of disk device names is referenced in various expressions.
-    diskDevices: ['nvme.+', 'rbd.+', 'sd.+', 'vd.+', 'xvd.+', 'dm-.+'],
+    diskDevices: ['nvme.+', 'rbd.+', 'sd.+', 'vd.+', 'xvd.+', 'dm-.+', 'dasd.+'],
     diskDeviceSelector: 'device=~"%s"' % std.join('|', self.diskDevices),
   },
 }
